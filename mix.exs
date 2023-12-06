@@ -6,7 +6,8 @@ defmodule MonorepoExample.MixProject do
       apps_path: "apps",
       version: "0.1.0",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      releases: releases()
     ]
   end
 
@@ -17,5 +18,18 @@ defmodule MonorepoExample.MixProject do
   # Run "mix help deps" for examples and options.
   defp deps do
     []
+  end
+
+  defp releases do
+    [
+      app_c: [
+        include_executables_for: [:unix],
+        applications: [app_c: :permanent]
+      ],
+      app_d: [
+        include_executables_for: [:unix],
+        applications: [app_d: :permanent]
+      ]
+    ]
   end
 end
