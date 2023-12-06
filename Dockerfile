@@ -50,13 +50,17 @@ FROM ${RUNNER_IMAGE} AS final
 RUN apk upgrade --no-cache && \ 
   apk add --no-cache bash openssl libgcc libstdc++ ncurses-libs
 
+ARG APP_NAME
+
 WORKDIR /opt/app
 
 COPY --from=builder /opt/app/_build/prod/rel/${APP_NAME}*  .
 
 RUN find /opt/app -type f -perm +0100 -exec chmod 555 {} \;
 
-ENTRYPOINT  ["./bin/${APP_NAME}" ]
+RUN cp ./bin/${APP_NAME} ./bin/release
+
+ENTRYPOINT  ["./bin/release" ]
 
 CMD ["start"]
 
