@@ -59,3 +59,10 @@ iex(app_d@6573325de339)1> Application.started_applications()
 ]
 iex(app_d@6573325de339)2>
 ```
+
+
+## Using this repo as a template
+
+You can use this repo as a template to scaffold a new umbrella project.
+Just clone it, `git reset --hard` to the last relevant commit (e.g. 6b352a5),
+and adjust the README as well as all occurences of `monorepo` to your liking.
