@@ -6,6 +6,7 @@ defmodule MonorepoExample.MixProject do
       apps_path: "apps",
       version: "0.1.0",
       start_permanent: Mix.env() == :prod,
+      aliases: aliases(),
       deps: deps(),
       releases: releases()
     ]
@@ -31,5 +32,32 @@ defmodule MonorepoExample.MixProject do
         applications: [app_d: :permanent]
       ]
     ]
+  end
+
+  defp aliases do
+    [
+      "docker.build": [&docker_build/1]
+    ]
+  end
+
+  defp docker_build(releases_to_build) do
+    defined_releases = releases() |> Keyword.keys() |> Enum.map(&to_string(&1))
+
+    Enum.each(releases_to_build, fn rel ->
+      unless rel in defined_releases do
+        raise "unknown release: #{rel}"
+      end
+    end)
+
+    releases_to_build =
+      if releases_to_build == [] do
+        defined_releases
+      end
+
+    Enum.each(releases_to_build, fn rel ->
+      Mix.shell().cmd(
+        "docker buildx build --build-arg APP_NAME=#{rel} -t monorepo_#{rel}:latest ."
+      )
+    end)
   end
 end

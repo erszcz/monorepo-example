@@ -24,8 +24,15 @@ docker buildx build --build-arg APP_NAME=<release-name> -t <release-container-ta
 For example:
 
 ```
-docker buildx build --build-arg APP_NAME=app_c -t monorepo-app-c:latest .
-docker buildx build --build-arg APP_NAME=app_d -t monorepo-app-d:latest .
+docker buildx build --build-arg APP_NAME=app_c -t monorepo_app_c:latest .
+docker buildx build --build-arg APP_NAME=app_d -t monorepo_app_d:latest .
+```
+
+We can also use the alias defined in `mix.exs` to build all the release
+container images defined in this repo:
+
+```
+mix docker.build
 ```
 
 Check out `config/runtime.exs` and [Direnv](https://direnv.net/) `.envrc` to see how
@@ -37,7 +44,7 @@ How can we tell that two distinct releases were actually built?
 $ docker run --rm -it \
   --env MONOREPO_RELEASE_APP=app_c \
   --env MONOREPO_APP_C_OPTION=${MONOREPO_APP_C_OPTION} \
-  docker.io/library/monorepo-app-c:latest start_iex
+  docker.io/library/monorepo_app_c:latest start_iex
 Erlang/OTP 25 [erts-13.2.2] [source] [64-bit] [smp:8:8] [ds:8:8:10] [async-threads:1] [jit]
 
 Interactive Elixir (1.13.4) - press Ctrl+C to exit (type h() ENTER for help)
@@ -58,7 +65,7 @@ iex(app_c@63ce91c04b00)2> Application.get_all_env(:app_d)
 $ docker run --rm -it \
   --env MONOREPO_RELEASE_APP=app_d \
   --env MONOREPO_APP_D_OPTION=${MONOREPO_APP_D_OPTION} \
-  docker.io/library/monorepo-app-d:latest start_iex
+  docker.io/library/monorepo_app_d:latest start_iex
 Erlang/OTP 25 [erts-13.2.2] [source] [64-bit] [smp:8:8] [ds:8:8:10] [async-threads:1] [jit]
 
 Interactive Elixir (1.13.4) - press Ctrl+C to exit (type h() ENTER for help)
