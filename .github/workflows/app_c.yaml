@@ -9,6 +9,7 @@ on:
 
 env:
   MONOREPO_RELEASE_APP: app_c
+  MONOREPO_APP_C_OPTION: app-c-option-123
 
 defaults:
   run:
