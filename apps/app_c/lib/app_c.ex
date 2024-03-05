@@ -9,10 +9,10 @@ defmodule AppC do
   ## Examples
 
       iex> AppC.hello()
-      :world
+      :worldz
 
   """
   def hello do
-    :world
+    :worldz
   end
 end
