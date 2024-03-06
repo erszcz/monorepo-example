@@ -1,6 +1,6 @@
-ARG ELIXIR_VERSION=1.13.4
-ARG OTP_VERSION=25.3.2
-ARG ALPINE_VERSION=3.17.3
+ARG ELIXIR_VERSION=1.15.2
+ARG OTP_VERSION=25.3.2.3
+ARG ALPINE_VERSION=3.16.6
 
 ARG BUILDER_IMAGE=hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-alpine-${ALPINE_VERSION}
 ARG RUNNER_IMAGE=alpine:${ALPINE_VERSION}
@@ -60,7 +60,7 @@ RUN find /opt/app -type f -perm +0100 -exec chmod 555 {} \;
 
 RUN cp ./bin/${APP_NAME} ./bin/release
 
-ENTRYPOINT  ["./bin/release" ]
+ENTRYPOINT  ["./bin/release"]
 
 CMD ["start"]
 
