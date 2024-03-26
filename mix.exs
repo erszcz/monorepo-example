@@ -49,10 +49,7 @@ defmodule MonorepoExample.MixProject do
       end
     end)
 
-    releases_to_build =
-      if releases_to_build == [] do
-        defined_releases
-      end
+    releases_to_build = releases_to_build == [] && defined_releases || releases_to_build
 
     Enum.each(releases_to_build, fn rel ->
       Mix.shell().cmd(
