@@ -13,6 +13,6 @@ defmodule AppC do
 
   """
   def hello do
-    :world
+    :world_of_c
   end
 end

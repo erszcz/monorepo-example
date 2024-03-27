@@ -13,6 +13,6 @@ defmodule AppD do
 
   """
   def hello do
-    :world
+    :world_of_d
   end
 end
