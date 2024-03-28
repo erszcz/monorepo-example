@@ -1,8 +1,8 @@
-defmodule AppBTest do
+defmodule LibBTest do
   use ExUnit.Case
-  doctest AppB
+  doctest LibB
 
   test "greets the world" do
-    assert AppB.hello() == :world
+    assert LibB.hello() == :world
   end
 end

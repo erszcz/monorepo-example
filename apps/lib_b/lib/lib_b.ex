@@ -1,6 +1,6 @@
-defmodule AppB do
+defmodule LibB do
   @moduledoc """
-  Documentation for `AppB`.
+  Documentation for `LibB`.
   """
 
   @doc """
@@ -8,7 +8,7 @@ defmodule AppB do
 
   ## Examples
 
-      iex> AppB.hello()
+      iex> LibB.hello()
       :world
 
   """

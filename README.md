@@ -73,7 +73,7 @@ iex(app_d@6573325de339)1> Application.started_applications()
 [
   ...
   {:app_d, 'app_d', '0.1.0'},
-  {:app_b, 'app_b', '0.1.0'},
+  {:lib_b, 'lib_b', '0.1.0'},
   ...
 ]
 iex(app_d@6573325de339)1> Application.get_all_env(:app_c)
