@@ -16,7 +16,7 @@ ENV MIX_ENV=prod
 
 # The following are build arguments used to change variable parts of the image.
 # The name of your application/release (required)
-ARG APP_NAME
+ARG MONOREPO_SERVICE
 
 # By convention, /opt is typically used for applications
 WORKDIR /opt/app
@@ -43,22 +43,22 @@ ARG APP_VSN
 
 ENV APP_VSN=${APP_VSN}
 
-RUN mix release ${APP_NAME}
+RUN mix release ${MONOREPO_SERVICE}
 
 # From this line onwards, we're in a new image, which will be the image used in production
 FROM ${RUNNER_IMAGE} AS final
 RUN apk upgrade --no-cache && \ 
   apk add --no-cache bash openssl libgcc libstdc++ ncurses-libs
 
-ARG APP_NAME
+ARG MONOREPO_SERVICE
 
 WORKDIR /opt/app
 
-COPY --from=builder /opt/app/_build/prod/rel/${APP_NAME}*  .
+COPY --from=builder /opt/app/_build/prod/rel/${MONOREPO_SERVICE}*  .
 
 RUN find /opt/app -type f -perm +0100 -exec chmod 555 {} \;
 
-RUN cp ./bin/${APP_NAME} ./bin/release
+RUN cp ./bin/${MONOREPO_SERVICE} ./bin/release
 
 ENTRYPOINT  ["./bin/release"]
 

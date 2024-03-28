@@ -1,19 +1,19 @@
 ---
-name: app-c-tests
+name: service-d-tests
 
 on:
   pull_request:
     paths:
-      - 'apps/app_c/**'
+      - 'apps/service_d/**'
       - '.github/workflows/**'
 
 env:
-  MONOREPO_RELEASE_APP: app_c
-  MONOREPO_APP_C_OPTION: app-c-option-123
+  MONOREPO_SERVICE: service_d
+  MONOREPO_SERVICE_D_OPTION: service-d-option-456
 
 defaults:
   run:
-    working-directory: ./apps/app_c
+    working-directory: ./apps/service_d
 
 jobs:
   build:

@@ -18,14 +18,14 @@ And a `Dockerfile` flexible enough to containerize each release independently.
 Building a release container image:
 
 ```
-docker buildx build --build-arg APP_NAME=<release-name> -t <release-container-tag> .
+docker buildx build --build-arg MONOREPO_SERVICE=<release-name> -t <release-container-tag> .
 ```
 
 For example:
 
 ```
-docker buildx build --build-arg APP_NAME=service_c -t monorepo_service_c:latest .
-docker buildx build --build-arg APP_NAME=service_d -t monorepo_service_d:latest .
+docker buildx build --build-arg MONOREPO_SERVICE=service_c -t monorepo_service_c:latest .
+docker buildx build --build-arg MONOREPO_SERVICE=service_d -t monorepo_service_d:latest .
 ```
 
 We can also use the alias defined in `mix.exs` to build all the release
@@ -42,7 +42,7 @@ How can we tell that two distinct releases were actually built?
 
 ```
 $ docker run --rm -it \
-  --env MONOREPO_RELEASE_APP=service_c \
+  --env MONOREPO_SERVICE=service_c \
   --env MONOREPO_SERVICE_C_OPTION=${MONOREPO_SERVICE_C_OPTION} \
   docker.io/library/monorepo_service_c:latest start_iex
 Erlang/OTP 25 [erts-13.2.2] [source] [64-bit] [smp:8:8] [ds:8:8:10] [async-threads:1] [jit]
@@ -63,7 +63,7 @@ iex(service_c@63ce91c04b00)2> Application.get_all_env(:service_d)
 
 ```
 $ docker run --rm -it \
-  --env MONOREPO_RELEASE_APP=service_d \
+  --env MONOREPO_SERVICE=service_d \
   --env MONOREPO_SERVICE_D_OPTION=${MONOREPO_SERVICE_D_OPTION} \
   docker.io/library/monorepo_service_d:latest start_iex
 Erlang/OTP 25 [erts-13.2.2] [source] [64-bit] [smp:8:8] [ds:8:8:10] [async-threads:1] [jit]

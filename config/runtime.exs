@@ -26,5 +26,5 @@ defmodule Monorepo.RuntimeConfig do
   end
 end
 
-release_app = System.fetch_env!("MONOREPO_RELEASE_APP")
+release_app = System.fetch_env!("MONOREPO_SERVICE")
 Monorepo.RuntimeConfig.configure(release_app)

@@ -53,7 +53,7 @@ defmodule MonorepoExample.MixProject do
 
     Enum.each(releases_to_build, fn rel ->
       Mix.shell().cmd(
-        "docker buildx build --build-arg APP_NAME=#{rel} -t monorepo_#{rel}:latest ."
+        "docker buildx build --build-arg MONOREPO_SERVICE=#{rel} -t monorepo_#{rel}:latest ."
       )
     end)
   end
