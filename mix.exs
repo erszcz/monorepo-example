@@ -27,9 +27,9 @@ defmodule MonorepoExample.MixProject do
         include_executables_for: [:unix],
         applications: [service_c: :permanent]
       ],
-      app_d: [
+      service_d: [
         include_executables_for: [:unix],
-        applications: [app_d: :permanent]
+        applications: [service_d: :permanent]
       ]
     ]
   end

@@ -8,7 +8,7 @@ Please note this umbrella project / repo defines two releases:
   defp releases do
     [
       service_c: ...,
-      app_d: ...
+      service_d: ...
     ]
   end
 ```
@@ -25,7 +25,7 @@ For example:
 
 ```
 docker buildx build --build-arg APP_NAME=service_c -t monorepo_service_c:latest .
-docker buildx build --build-arg APP_NAME=app_d -t monorepo_app_d:latest .
+docker buildx build --build-arg APP_NAME=service_d -t monorepo_service_d:latest .
 ```
 
 We can also use the alias defined in `mix.exs` to build all the release
@@ -57,27 +57,27 @@ iex(service_c@63ce91c04b00)1> Application.started_applications()
 ]
 iex(service_c@63ce91c04b00)2> Application.get_all_env(:service_c)
 [service_c_option: "service-c-val"]
-iex(service_c@63ce91c04b00)2> Application.get_all_env(:app_d)
+iex(service_c@63ce91c04b00)2> Application.get_all_env(:service_d)
 []
 ```
 
 ```
 $ docker run --rm -it \
-  --env MONOREPO_RELEASE_APP=app_d \
-  --env MONOREPO_APP_D_OPTION=${MONOREPO_APP_D_OPTION} \
-  docker.io/library/monorepo_app_d:latest start_iex
+  --env MONOREPO_RELEASE_APP=service_d \
+  --env MONOREPO_SERVICE_D_OPTION=${MONOREPO_SERVICE_D_OPTION} \
+  docker.io/library/monorepo_service_d:latest start_iex
 Erlang/OTP 25 [erts-13.2.2] [source] [64-bit] [smp:8:8] [ds:8:8:10] [async-threads:1] [jit]
 
 Interactive Elixir (1.13.4) - press Ctrl+C to exit (type h() ENTER for help)
-iex(app_d@6573325de339)1> Application.started_applications()
+iex(service_d@6573325de339)1> Application.started_applications()
 [
   ...
-  {:app_d, 'app_d', '0.1.0'},
+  {:service_d, 'service_d', '0.1.0'},
   {:lib_b, 'lib_b', '0.1.0'},
   ...
 ]
-iex(app_d@6573325de339)1> Application.get_all_env(:service_c)
+iex(service_d@6573325de339)1> Application.get_all_env(:service_c)
 []
-iex(app_d@6573325de339)1> Application.get_all_env(:app_d)
-[app_d_option: "app-d-val"]
+iex(service_d@6573325de339)1> Application.get_all_env(:service_d)
+[service_d_option: "service-d-val"]
 ```

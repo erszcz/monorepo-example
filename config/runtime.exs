@@ -21,8 +21,8 @@ defmodule Monorepo.RuntimeConfig do
     config :service_c, :service_c_option, System.fetch_env!("MONOREPO_SERVICE_C_OPTION")
   end
 
-  def configure("app_d") do
-    config :app_d, :app_d_option, System.fetch_env!("MONOREPO_APP_D_OPTION")
+  def configure("service_d") do
+    config :service_d, :service_d_option, System.fetch_env!("MONOREPO_SERVICE_D_OPTION")
   end
 end
 
