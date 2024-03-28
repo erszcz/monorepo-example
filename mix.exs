@@ -23,9 +23,9 @@ defmodule MonorepoExample.MixProject do
 
   defp releases do
     [
-      app_c: [
+      service_c: [
         include_executables_for: [:unix],
-        applications: [app_c: :permanent]
+        applications: [service_c: :permanent]
       ],
       app_d: [
         include_executables_for: [:unix],

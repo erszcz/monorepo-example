@@ -1,8 +1,8 @@
-defmodule AppCTest do
+defmodule ServiceCTest do
   use ExUnit.Case
-  doctest AppC
+  doctest ServiceC
 
   test "greets the world" do
-    assert AppC.hello() == :world
+    assert ServiceC.hello() == :world
   end
 end

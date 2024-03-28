@@ -1,6 +1,6 @@
-defmodule AppC do
+defmodule ServiceC do
   @moduledoc """
-  Documentation for `AppC`.
+  Documentation for `ServiceC`.
   """
 
   @doc """
@@ -8,7 +8,7 @@ defmodule AppC do
 
   ## Examples
 
-      iex> AppC.hello()
+      iex> ServiceC.hello()
       :world
 
   """

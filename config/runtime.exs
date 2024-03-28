@@ -17,8 +17,8 @@ import Config
 #       metadata: [:user_id]
 
 defmodule Monorepo.RuntimeConfig do
-  def configure("app_c") do
-    config :app_c, :app_c_option, System.fetch_env!("MONOREPO_APP_C_OPTION")
+  def configure("service_c") do
+    config :service_c, :service_c_option, System.fetch_env!("MONOREPO_SERVICE_C_OPTION")
   end
 
   def configure("app_d") do

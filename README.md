@@ -7,7 +7,7 @@ Please note this umbrella project / repo defines two releases:
 ```
   defp releases do
     [
-      app_c: ...,
+      service_c: ...,
       app_d: ...
     ]
   end
@@ -24,7 +24,7 @@ docker buildx build --build-arg APP_NAME=<release-name> -t <release-container-ta
 For example:
 
 ```
-docker buildx build --build-arg APP_NAME=app_c -t monorepo_app_c:latest .
+docker buildx build --build-arg APP_NAME=service_c -t monorepo_service_c:latest .
 docker buildx build --build-arg APP_NAME=app_d -t monorepo_app_d:latest .
 ```
 
@@ -42,22 +42,22 @@ How can we tell that two distinct releases were actually built?
 
 ```
 $ docker run --rm -it \
-  --env MONOREPO_RELEASE_APP=app_c \
-  --env MONOREPO_APP_C_OPTION=${MONOREPO_APP_C_OPTION} \
-  docker.io/library/monorepo_app_c:latest start_iex
+  --env MONOREPO_RELEASE_APP=service_c \
+  --env MONOREPO_SERVICE_C_OPTION=${MONOREPO_SERVICE_C_OPTION} \
+  docker.io/library/monorepo_service_c:latest start_iex
 Erlang/OTP 25 [erts-13.2.2] [source] [64-bit] [smp:8:8] [ds:8:8:10] [async-threads:1] [jit]
 
 Interactive Elixir (1.13.4) - press Ctrl+C to exit (type h() ENTER for help)
-iex(app_c@63ce91c04b00)1> Application.started_applications()
+iex(service_c@63ce91c04b00)1> Application.started_applications()
 [
   ...
-  {:app_c, 'app_c', '0.1.0'},
+  {:service_c, 'service_c', '0.1.0'},
   {:lib_a, 'lib_a', '0.1.0'},
   ...
 ]
-iex(app_c@63ce91c04b00)2> Application.get_all_env(:app_c)
-[app_c_option: "app-c-val"]
-iex(app_c@63ce91c04b00)2> Application.get_all_env(:app_d)
+iex(service_c@63ce91c04b00)2> Application.get_all_env(:service_c)
+[service_c_option: "service-c-val"]
+iex(service_c@63ce91c04b00)2> Application.get_all_env(:app_d)
 []
 ```
 
@@ -76,7 +76,7 @@ iex(app_d@6573325de339)1> Application.started_applications()
   {:lib_b, 'lib_b', '0.1.0'},
   ...
 ]
-iex(app_d@6573325de339)1> Application.get_all_env(:app_c)
+iex(app_d@6573325de339)1> Application.get_all_env(:service_c)
 []
 iex(app_d@6573325de339)1> Application.get_all_env(:app_d)
 [app_d_option: "app-d-val"]
