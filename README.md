@@ -52,7 +52,7 @@ iex(app_c@63ce91c04b00)1> Application.started_applications()
 [
   ...
   {:app_c, 'app_c', '0.1.0'},
-  {:app_a, 'app_a', '0.1.0'},
+  {:lib_a, 'lib_a', '0.1.0'},
   ...
 ]
 iex(app_c@63ce91c04b00)2> Application.get_all_env(:app_c)

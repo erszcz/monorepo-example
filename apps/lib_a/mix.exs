@@ -1,9 +1,9 @@
-defmodule AppA.MixProject do
+defmodule LibA.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :app_a,
+      app: :lib_a,
       version: "0.1.0",
       build_path: "../../_build",
       config_path: "../../config/config.exs",
